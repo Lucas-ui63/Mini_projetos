@@ -1,26 +1,27 @@
 import sqlite3
 class Lista:
-    def __init__(self, banco):
+    def __init__(self, banco) -> None:
         self.banco = banco
-    def add(self):
+
+    def add(self) -> None:
         try:
-            entrada = input('Digite a tarefa a ser adicionada:')  
+            entrada:str = input('Digite a tarefa a ser adicionada:')  
             self.banco.inserir_dados(entrada) 
         
         except Exception as e:
             print(e)              
         except:
             print('Erro ao adicionar tarefa')
-    def remove(self):
+    def remove(self) -> None:
         try:
-            remover = input('Digite a tarefa a ser removida:')
+            remover:str = input('Digite a tarefa a ser removida:')
             self.banco.remover_dados(remover)
             
         except Exception as e:
             print(e)
         except:
             print('O item nao foi encontrado na lista')
-    def listar(self):
+    def listar(self) -> None:
         try:
             print(self.banco.ler_dados())
         except Exception as e:
@@ -29,7 +30,7 @@ class Lista:
             print('A lista esta vazia')
     
 class SQlite:
-    def __init__(self):
+    def __init__(self) -> None:
         conn = self.conexao()
         cursor = conn.cursor()
         cursor.execute("""
@@ -40,19 +41,19 @@ class SQlite:
         """)
         conn.commit()
         conn.close()
-    def conexao(self):
+    def conexao(self) -> None:
         try:
             conn = sqlite3.connect('tarefas.db')
             return conn
         except:
             print('Erro ao conectar ao banco de dados')
-    def inserir_dados(self,entrada):
+    def inserir_dados(self,entrada) -> None:
         conn = self.conexao()
         cursor = conn.cursor()
         cursor.execute("INSERT INTO tarefas (tarefa) VALUES (?)", (entrada,))
         conn.commit()
         conn.close()
-    def remover_dados(self,remover):
+    def remover_dados(self,remover) -> None:
         conn = self.conexao()
         cursor = conn.cursor()
         cursor.execute("DELETE FROM tarefas WHERE tarefa = ?", (remover,))
@@ -69,7 +70,7 @@ class SQlite:
 banco = SQlite()    
 opcoes = Lista(banco)
 while True:
-    opcao = input('Escolha uma opção:\n1 - Adicionar\n2 - Remover\n3 - Listar\n4 - Sair')
+    opcao:str = input('Escolha uma opção:\n1 - Adicionar\n2 - Remover\n3 - Listar\n4 - Sair')
     if opcao == '1':
         opcoes.add()
     elif opcao == '2':

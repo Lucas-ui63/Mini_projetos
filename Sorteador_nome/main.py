@@ -1,6 +1,6 @@
 import random
 class Sorteador:
-    def __init__(self, nomes):
+    def __init__(self, nomes) -> None:
         self.nomes = nomes
 
     def sortear(self):

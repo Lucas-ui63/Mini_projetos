@@ -1,6 +1,6 @@
 import random
 class Senha:
-    def gerar_senha():
+    def gerar_senha() -> str:
         caracteres = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*"
         senha = ""
         
